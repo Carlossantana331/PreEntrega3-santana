@@ -1,0 +1,14 @@
+*{
+    background-color: aqua;
+
+    text-align: center;
+
+}
+
+#menuInicial {
+    display: none
+}
+
+#switch {
+    display: none
+}
