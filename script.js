@@ -55,11 +55,11 @@ function validarFecha(fecha) {
 
 // Función para imprimir las tareas en formato de lista
 function listaTareas(tareas) {
-    let lista = "<ul>"; // Inicia una lista no ordenada
+    let lista = "<ul class = 'listaTareasContainer'>"; // Inicia una lista no ordenada
 
     for (let i = 0; i < tareas.length; i++) {
-        lista += "<li>"; // Inicia un ítem de lista
-        lista += (i + 1) + "- Tarea por hacer: " + tareas[i].tarea + "<br>"; // Contenido de la tarea
+        lista += "<li class = 'listaTareasItem'>"; // Inicia un ítem de lista
+        lista += "Tarea por hacer: " + tareas[i].tarea + "<br>"; // Contenido de la tarea
         lista += "Fecha límite: " + tareas[i].fechaLimite; // Fecha límite
         lista += "</li>"; // Termina el ítem de lista
     }
@@ -71,12 +71,12 @@ function listaTareas(tareas) {
 function actualizarListaTareas() {
     let listaTareasElemento = document.getElementById("listaTareas");
     if (tareas.length !== 0) {
-        let lista = "<ul>"; // Inicia una lista no ordenada
+        let lista = "<ul class = 'listaTareasContainer'>"; // Inicia una lista no ordenada
 
         // Recorre todas las tareas y las agrega a la lista con un botón de eliminación
         for (let i = 0; i < tareas.length; i++) {
-            lista += "<li>"; // Inicia un ítem de lista
-            lista += (i + 1) + "- Tarea por hacer: " + tareas[i].tarea + "<br>"; // Contenido de la tarea
+            lista += "<li class = 'listaTareasItem'>"; // Inicia un ítem de lista
+            lista += "Tarea por hacer: " + tareas[i].tarea + "<br>"; // Contenido de la tarea
             lista += "Fecha límite: " + tareas[i].fechaLimite; // Fecha límite
             lista += `<button onclick="tareaCompletada(${i})">Completada</button>`; //Botón de finalizacion de una tarea
             lista += `<button onclick="eliminarTarea(${i})">Eliminar</button>`; // Botón de eliminación
@@ -110,17 +110,17 @@ function tareaCompletada(index) {
 function actualizarListaTareasCompletadas() {
     let listaTareasCompletadasElemento = document.getElementById("listaTareasCompletadas");
     if (tareasCompletadas.length !== 0) {
-        let lista = "<ul>"; // Inicia una lista no ordenada
+        let lista = "<ul class = 'listaTareasContainer'>"; // Inicia una lista no ordenada
 
         // Recorre todas las tareas completadas y las agrega a la lista
         for (let i = 0; i < tareasCompletadas.length; i++) {
-            lista += "<li>"; // Inicia un ítem de lista
-            lista += (i + 1) + "- Tarea completada: " + tareasCompletadas[i].tarea + "<br>"; // Contenido de la tarea completada
+            lista += "<li class = 'listaTareasItem'>"; // Inicia un ítem de lista
+            lista += "Tarea completada: " + tareasCompletadas[i].tarea + "<br>"; // Contenido de la tarea completada
             lista += "Fecha límite: " + tareasCompletadas[i].fechaLimite + "<br>"; // Fecha límite
             lista += "Fecha en la que se realizo: " + tareasCompletadas[i].fechaCompletado; // Fecha de completado
             lista += "</li>"; // Termina el ítem de lista
         }
-
+        
         lista += "</ul>"; // Termina la lista no ordenada
         listaTareasCompletadasElemento.innerHTML = lista;
     } else {
