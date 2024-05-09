@@ -3,97 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="css/style.css">
+
     <title>Document</title>
 </head>
 
+
 <body>
-
-    <h1 id="nombreUsuario">Bienvenido a tu lista de tareas</h1>
-
-    <form id="formularioNombre">
-        <input type="text" id="inputUsuario" placeholder="Bienvenido, por favor ingresa tu nombre: ">
-        <button type="submit">></button>
-    </form>
     
 
+    <ul class="menu">
 
-    <div id="menuInicial">
-        <!--esta parte es para que en la pagina aparezcan las opciones para el usuario-->
-        <h2>Elige una opción:</h2>
+        <!--ocpion 1: Consultar tareas-->
+        <li class="menuItem">
 
-        <ul id="opciones">
-            <li>1 - Consultar tareas pendientes</li>
-            <li>2 - Crear tarea</li>
-            <li>3 - Eliminar tarea</li>
-            <li>4 - Salir</li>
-        </ul>
-        
-        <!--input de la opcion deseada-->
-        <form id="opcionesForm">
-            <label for="opcionInput">Ingresa el número de la opción elegida:</label>
-            <input type="number" id="opcionInput" min="1" max="4" required>
-            <button type="submit">Confirmar</button>
-        </form>
+            <div class="menuMostrar menuMostrarClick">
+                <a href="#" class="menuLink">Consultar tareas pendientes</a>
+            </div>
 
+            <ul class="subMenu">
+                <li class="subMenuInside">
+                    <div id="listaTareas"></div>
+                </li>
+            </ul>
+            
+        </li>
 
-        <div id="infoOpcion"></div>
+        <!--ocpion 2: Consultar tareas-->
+        <li class="menuItem">
 
-    </div>
+            <div class="menuMostrar menuMostrarClick">
+                <a href="#" class="menuLink">Crear</a>
+            </div>
 
-    
-
-    <!--opciones-->
-    <div id="switch" >
-
-        <!--caso 1-->
-        <div id="listaTareasHTML">
-            <ul id="listaTareas"></ul>
-            <button onclick="regresarMenuPrincipal()">Regresar al menú principal</button>
-        </div>
-    
-
-        <!--caso 2-->
-        <div id="agregarTarea">        
-            <form id="tareaForm" class="formularioNuevaTarea">
-    
-                <label for="tareaInput">Tarea:</label>
-                <input type="text" id="tareaInput" required>
-        
-                <label for="fechaInput">Fecha límite (DD-MM):</label>
-                <input type="date" id="fechaInput" required>
-        
-                <label for="recurrente">Todos los dias</label>
-                <input type="checkbox" id="recurrente">
-        
-                <button type="submit">Agregar Tarea</button>
-            </form>
-
-        </div>
-
-    </div>
+            <ul class="subMenu">
+                <li class="subMenuInside">
+                    <input type="text" id="input-tarea" placeholder="Nueva tarea">
+                    <input type="date" id="input-fecha" placeholder="Fecha límite">
+                    <button id="boton-agregar-tarea">Agregar tarea</button>
+                </li>
+            </ul>
+            
+        </li>
 
 
+        <!--ocpion 3: Consultar tareas completadas-->
+        <li class="menuItem">
 
+            <div class="menuMostrar menuMostrarClick">
+                <a href="#" class="menuLink">Tareas completadas</a>
+            </div>
 
+            <ul class="subMenu">
+                <li class="subMenuInside">
+                    <div id="listaTareasCompletadas"></div>
+                </li>
+                <li class="menuItem">
+                    <button id="limpiarTareasCompletadas">Limpiar tareas completadas</button>
+                </li>
+                
+            </ul>
+            
+        </li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
+    </ul>
 
 
     <script src="script.js"></script>
 </body>
-
 </html>

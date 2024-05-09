@@ -1,90 +1,27 @@
-//funcion para almacenar el nombre del usuario
-function guardarNombre(e){
-    e.preventDefault();
-    
-    let nombre = document.getElementById("inputUsuario").value;
 
-    localStorage.setItem("nombre", nombre);
-}
+//codigo para hacer que el menu sea dinamico (aparezca y desaparezca)
+let mostrarElementos = document.querySelectorAll('.menuMostrarClick');
 
+mostrarElementos.forEach(listarElementos => {
+    listarElementos.addEventListener('click', () => {
+        mostrarElementos.forEach(menu => {
+            if (menu !== listarElementos && menu.classList.contains('arrow')) {
+                menu.classList.remove('arrow');
+                menu.nextElementSibling.style.height = "0px";
+            }
+        });
 
-//funcion para mostrar el nombre del usuario
-function saludoPersonalizado (){
-    let elementoNombre = document.getElementById ("nombreUsuario")
-    let nombreIngresado = localStorage.getItem ("nombre")
+        listarElementos.classList.toggle('arrow');
 
-    if (nombreIngresado) {
-        elementoNombre.textContent = "Bienvenido a tu lista de tareas, " + nombreIngresado;
-    }else{
-        elementoNombre.textContent = "Bienvenido";
-    }
-}
+        let height = 0;
+        let menu = listarElementos.nextElementSibling;
+        if (menu.clientHeight == "0") {
+            height = menu.scrollHeight;
+        }
 
-//funcion para mostrar/ocultar el menu inicial y el formulario para el nombre de usuario 
-function mostrarFormularioTareas() {
-    document.getElementById("formularioNombre").style.display = "none"; // oculta el formulario de ingreso de nombre
-    document.getElementById("menuInicial").style.display = "block"; // muestra el formulario de tareas
-}
-
-//funcion para comprobar si hay un nombre guardado previamente
-function comprobarNombreGuardado() {
-    let nombreIngresado = localStorage.getItem("nombre");
-
-    if (nombreIngresado) {
-        saludoPersonalizado(); // muestra un saludo personalizado si hay un nombre guardado
-        mostrarFormularioTareas(); // muestra directamente el menu inicial si hay un nombre guardado
-    }
-}
-
-
-//funcion  para imrpimir las tareas que tengo ingresadas
-function listaTareas(tareas) {
-    let lista = "Lista de tareas: \n";
-    for (let i = 0; i < tareas.length; i++) {
-        lista += (i + 1) + "- Tarea por hacer: " + tareas[i].tarea + "\n    Fecha límite: " + tareas[i].fechaLimite + "\n--------------------------------------\n";
-    }
-    return lista;
-}
-
-// Actualizar el contenido del HTML con la lista de tareas
-function actualizarListaTareas() {
-    let listaTareasElemento = document.getElementById("listaTareas");
-    if (tareas.length !== 0) {
-        listaTareasElemento.innerHTML = listaTareas(tareas);
-    } else {
-        listaTareasElemento.innerHTML = "<li>Aun no hay tareas en la lista.</li>";
-    }
-}
-
-//funcion para mostrar que opcion fue elegida
-function mostrarInfo(mensaje) {
-    document.getElementById("infoOpcion").textContent = mensaje;
-}
-
-//funciones para mostrar/ocultar elemento
-function mostrarElemento(id) {
-    document.getElementById(id).style.display = "block";
-}
-
-function ocultarElemento(id) {
-    document.getElementById(id).style.display = "none";
-}
-
-//funcion para regresar al menu principal
-function regresarMenuPrincipal() {
-    mostrarElemento("menuInicial");
-    ocultarElemento("listaTareasHTML");
-    eleccion = (0)
-}
-
-
-//llamada de las funciones
-saludoPersonalizado();
-comprobarNombreGuardado();
-
-document.getElementById("formularioNombre");
-document.addEventListener("submit", guardarNombre);
-document.addEventListener("DOMContentLoaded", saludoPersonalizado);
+        menu.style.height = `${height}px`;
+    })
+});
 
 
 
@@ -97,115 +34,172 @@ document.addEventListener("DOMContentLoaded", saludoPersonalizado);
 
 
 
-//funcion constructora de objetos
-function tareaPorHacer (tarea, fechaLimite) {
+// Función constructora de objetos para representar una tarea
+function TareaPorHacer(tarea, fechaLimite) {
     this.tarea = tarea;
     this.fechaLimite = fechaLimite;
 }
 
-
 // Función para agregar una nueva tarea al array
 function agregarTarea(nuevaTarea) {
     tareas.push(nuevaTarea);
+    localStorage.setItem("tareas", JSON.stringify(tareas));
 }
 
-
-//funcion para validar que la fecha sea ingresada como se solicita
+// Función para validar que la fecha sea ingresada en el formato DD-MM
 function validarFecha(fecha) {
-    // Expresión regular para el formato DD-MM
     let regex = /^\d{2}-\d{2}$/;
-    if (!regex.test(fecha)) {
-        return false;
+    return regex.test(fecha);
+}
+
+
+// Función para imprimir las tareas en formato de lista
+function listaTareas(tareas) {
+    let lista = "<ul>"; // Inicia una lista no ordenada
+
+    for (let i = 0; i < tareas.length; i++) {
+        lista += "<li>"; // Inicia un ítem de lista
+        lista += (i + 1) + "- Tarea por hacer: " + tareas[i].tarea + "<br>"; // Contenido de la tarea
+        lista += "Fecha límite: " + tareas[i].fechaLimite; // Fecha límite
+        lista += "</li>"; // Termina el ítem de lista
     }
 
-    // Extraer el mes de la fecha
-    let partesFecha = fecha.split("-");
-    let mes = parseInt(partesFecha[1], 10);
+    lista += "</ul>"; // Termina la lista no ordenada
+    return lista;
+}
 
-    // Verificar si el mes es válido (de 01 a 12)
-    return mes >= 1 && mes <= 12;
+function actualizarListaTareas() {
+    let listaTareasElemento = document.getElementById("listaTareas");
+    if (tareas.length !== 0) {
+        let lista = "<ul>"; // Inicia una lista no ordenada
+
+        // Recorre todas las tareas y las agrega a la lista con un botón de eliminación
+        for (let i = 0; i < tareas.length; i++) {
+            lista += "<li>"; // Inicia un ítem de lista
+            lista += (i + 1) + "- Tarea por hacer: " + tareas[i].tarea + "<br>"; // Contenido de la tarea
+            lista += "Fecha límite: " + tareas[i].fechaLimite; // Fecha límite
+            lista += `<button onclick="tareaCompletada(${i})">Completada</button>`; //Botón de finalizacion de una tarea
+            lista += `<button onclick="eliminarTarea(${i})">Eliminar</button>`; // Botón de eliminación
+            lista += "</li>"; // Termina el ítem de lista
+        }
+
+        lista += "</ul>"; // Termina la lista no ordenada
+        listaTareasElemento.innerHTML = lista;
+    } else {
+        listaTareasElemento.innerHTML = "<h2>Aun no hay tareas en la lista.</h2>";
+    }
+}
+
+
+//funcion para mover tareas a la lista de completadas 
+function tareaCompletada(index) {
+    tareasCompletadas.push({
+        tarea: tareas[index].tarea,
+        fechaLimite: tareas[index].fechaLimite,
+        fechaCompletado: new Date().toLocaleDateString(), // Fecha actual
+    });
+    tareas.splice(index, 1);
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+    localStorage.setItem("tareasCompletadas", JSON.stringify(tareasCompletadas));
+    actualizarListaTareas();
+    actualizarListaTareasCompletadas();
 }
 
 
 
+function actualizarListaTareasCompletadas() {
+    let listaTareasCompletadasElemento = document.getElementById("listaTareasCompletadas");
+    if (tareasCompletadas.length !== 0) {
+        let lista = "<ul>"; // Inicia una lista no ordenada
 
-
-
-
-
-
-
-//variables
-let tareas = [];
-
-
-document.getElementById("opcionesForm").addEventListener("submit", function(event) {
-event.preventDefault(); // Evitar el envío del formulario
-
-    let eleccion = parseInt(document.getElementById("opcionInput").value);
-
-    switch (eleccion) {
-        case 1:
-            mostrarElemento("switch")
-            ocultarElemento("menuInicial")
-            ocultarElemento("agregarTarea")
-            actualizarListaTareas();
-            break;
-
-        case 2:
-            mostrarElemento("switch")
-            ocultarElemento("menuInicial")
-            ocultarElemento("listaTareasHTML")
-            
-            let tarea = document.getElementById("tareaInput").value;
-            let fechaLimite = document.getElementById("fechaInput").value;
-            if (tarea && fechaLimite && validarFecha(fechaLimite)) {
-                let nuevaTarea = new tareaPorHacer(tarea, fechaLimite);
-                agregarTarea(nuevaTarea);
-                mostrarInfo("Tarea agregada correctamente.");
-            } else {
-                mostrarInfo("Por favor, ingrese una tarea y una fecha límite válida (DD-MM).");
-            }
-            break;
-            
-        case 3:
-            mostrarInfo("Eliminar tarea");
-            break;
-        case 4:
-            mostrarInfo("Salir");
-            break;
-        default:
-            mostrarInfo("Opción no válida. Por favor, elija una opción válida del 1 al 4.");
+        // Recorre todas las tareas completadas y las agrega a la lista
+        for (let i = 0; i < tareasCompletadas.length; i++) {
+            lista += "<li>"; // Inicia un ítem de lista
+            lista += (i + 1) + "- Tarea completada: " + tareasCompletadas[i].tarea + "<br>"; // Contenido de la tarea completada
+            lista += "Fecha límite: " + tareasCompletadas[i].fechaLimite + "<br>"; // Fecha límite
+            lista += "Fecha en la que se realizo: " + tareasCompletadas[i].fechaCompletado; // Fecha de completado
+            lista += "</li>"; // Termina el ítem de lista
         }
-});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//script para si es tarea diaria, desactivar la fecha
-document.getElementById("recurrente").addEventListener("change", function() {
-    // Obtener la referencia al elemento de fecha
-    var fechaInput = document.getElementById("fechaInput");
-
-    // Si la casilla de verificación está marcada, desactivar la entrada de fecha; de lo contrario, habilitarla
-    if (this.checked) {
-        fechaInput.disabled = true;
+        lista += "</ul>"; // Termina la lista no ordenada
+        listaTareasCompletadasElemento.innerHTML = lista;
     } else {
-        fechaInput.disabled = false;
+        listaTareasCompletadasElemento.innerHTML = "<h2>No hay tareas completadas.</h2>";
+    }
+}
+
+
+let tareasCompletadas = [];
+document.addEventListener("DOMContentLoaded", function() {
+    let tareasCompletadasGuardadas = localStorage.getItem("tareasCompletadas");
+    if (tareasCompletadasGuardadas) {
+        tareasCompletadas = JSON.parse(tareasCompletadasGuardadas);
+        actualizarListaTareasCompletadas();
     }
 });
 
 
+function eliminarTarea(index) {
+    tareas.splice(index, 1);
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+    actualizarListaTareas();
+}
 
 
+// Función para agregar una nueva tarea
+function agregarNuevaTarea() {
+    let tareaInput = document.getElementById("input-tarea").value.trim();
+    let fechaInput = document.getElementById("input-fecha").value; // Ya no necesitas el trim() aquí
+
+    if (tareaInput !== "" && fechaInput !== "") {
+        let nuevaFecha = new Date(fechaInput); // Convertir el valor del input de fecha a un objeto de fecha
+        let fechaFormateada = nuevaFecha.toLocaleDateString(); // Formatear la fecha si es necesario
+        let nuevaTarea = new TareaPorHacer(tareaInput, fechaFormateada);
+        agregarTarea(nuevaTarea);
+        document.getElementById("input-tarea").value = "";
+        document.getElementById("input-fecha").value = "";
+        actualizarListaTareas();
+    } else {
+        alert("Por favor, complete todos los campos.");
+    }
+}
+
+//funcion para limpiar el historial de tareas completadas
+function limpiarTareasCompletadas() {
+    tareasCompletadas = []; // Vaciar el array de tareas completadas
+    localStorage.removeItem("tareasCompletadas"); // Remover las tareas completadas del almacenamiento local
+    actualizarListaTareasCompletadas(); // Actualizar la visualización de la lista de tareas completadas
+}
+
+
+// Cargar tareas desde localStorage al cargar la página
+document.addEventListener("DOMContentLoaded", function() {
+    let tareasGuardadas = localStorage.getItem("tareas");
+    if (tareasGuardadas) {
+        tareas = JSON.parse(tareasGuardadas);
+        actualizarListaTareas();
+    }
+});
+
+//evento click en boton de tareas terminadas
+document.getElementById("limpiarTareasCompletadas").addEventListener("click", limpiarTareasCompletadas);
+
+// Obtener el botón "Agregar tarea" por su ID
+let botonAgregarTarea = document.getElementById("boton-agregar-tarea");
+
+// Agregar un event listener para el clic en el botón
+botonAgregarTarea.addEventListener("click", agregarNuevaTarea);
+
+// Obtener el enlace correspondiente a la opción 1
+let enlaceConsultarTareas = document.querySelector('.menuLink');
+
+// Agregar un evento de escucha para el clic en el enlace
+enlaceConsultarTareas.addEventListener('click', function(event) {
+    event.preventDefault(); // Evitar que el enlace siga el href
+
+    // Llamar a la función para actualizar la lista de tareas
+    actualizarListaTareas();
+});
+
+// Array para almacenar las tareas
+let tareas = [];
