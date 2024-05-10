@@ -59,7 +59,7 @@ function listaTareas(tareas) {
 
     for (let i = 0; i < tareas.length; i++) {
         lista += "<li class = 'listaTareasItem'>"; // Inicia un ítem de lista
-        lista += "Tarea por hacer: " + tareas[i].tarea + "<br>"; // Contenido de la tarea
+        lista += "Tarea por hacer: " + tareas[i].tarea.charAt(0).toUpperCase() + tareas[i].tarea.slice(1) + "<br>"; // Contenido de la tarea
         lista += "Fecha límite: " + tareas[i].fechaLimite; // Fecha límite
         lista += "</li>"; // Termina el ítem de lista
     }
@@ -76,7 +76,7 @@ function actualizarListaTareas() {
         // Recorre todas las tareas y las agrega a la lista con un botón de eliminación
         for (let i = 0; i < tareas.length; i++) {
             lista += "<li class = 'listaTareasItem'>"; // Inicia un ítem de lista
-            lista += "Tarea por hacer: " + tareas[i].tarea + "<br>"; // Contenido de la tarea
+            lista += "Tarea por hacer: " + tareas[i].tarea.charAt(0).toUpperCase() + tareas[i].tarea.slice(1) + "<br>"; // Contenido de la tarea
             lista += "Fecha límite: " + tareas[i].fechaLimite; // Fecha límite
             lista += "<div class = 'botonesListaTareas'>"
             lista += `<button onclick="tareaCompletada(${i})" class = "boton"><img src="assets/check.svg"></button>`; //Botón de finalizacion de una tarea
@@ -117,11 +117,12 @@ function actualizarListaTareasCompletadas() {
 
         // Recorre todas las tareas completadas y las agrega a la lista
         for (let i = 0; i < tareasCompletadas.length; i++) {
-            lista += "<li class = 'listaTareasItem'>"; // Inicia un ítem de lista
-            lista += "Tarea completada: " + tareasCompletadas[i].tarea + "<br>"; // Contenido de la tarea completada
+            lista += "<li class = 'listaTareasItem'>"; 
+            lista += "Tarea completada: " + tareasCompletadas[i].tarea.charAt(0).toUpperCase() + tareasCompletadas[i].tarea.slice(1) + "<br>"; // Contenido de la tarea completada
             lista += "Fecha límite: " + tareasCompletadas[i].fechaLimite + "<br>"; // Fecha límite
             lista += "Fecha en la que se realizo: " + tareasCompletadas[i].fechaCompletado; // Fecha de completado
-            lista += "</li>"; // Termina el ítem de lista
+            lista += "</li>"; 
+            lista += "<div class = 'lineaDivisora'></div>";
         }
         
         lista += "</ul>"; // Termina la lista no ordenada

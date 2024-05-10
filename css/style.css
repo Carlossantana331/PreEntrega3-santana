@@ -20,11 +20,17 @@
 }
 
 
+
+
 /*----------------------estilo general del menu----------------------*/
 a{
     text-decoration: none;
     list-style: none;
     color: rgb(240, 248, 255);
+}
+li
+{
+    list-style: none;
 }
 
 .menu{
@@ -46,11 +52,13 @@ a{
     width: 100%;
 }
 
-.subMenu {
+.subMenu{
     transition: height 0.4s;
     height: 0;
     font-family: "Teachers", sans-serif;
 }
+
+
 
 
 /*----------------------estilo opciones principales----------------------*/
@@ -96,18 +104,16 @@ a{
 }
 
 
+
+
 /*----------------------estilo consultar tareas----------------------*/
 h2{
     font-size: 20px;
     padding: 30px 0px;
 }
 
-li{
-    list-style: decimal;
-}
-
 .listaTareasItem{
-    padding: 10px 60px;
+    padding: 0px 60px 5px 60px;
     display: flex;
     justify-content: space-between;
 }
@@ -129,46 +135,82 @@ li{
 
  .lineaDivisora{
     border-bottom: 1px solid black;
+    margin-bottom: 20px;
  }
 
 
 
 
+ /*----------------------estilo crear tareas----------------------*/
 
+ .inputCrear {
+    font-family: "Teachers", sans-serif;
+    background-color: transparent;
+    color: #000000;
+    border: transparent;
+    border-bottom: 2px solid #000000;
+    height: 40px;
+    width: 300px;
+    font-size: 16px;
+ }
 
-
-
-
-
-
-
-
-
-
-
-
+ #input-tarea::placeholder {
+    color: #000000;
+}
 
 .subMenuCrear{
-    padding: 40px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 0px 130px 5px 130px;
+}
+
+.subMenuCrearInput{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.botonCrear{
+    background-color: #fafafa10;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 40px;
+    width: 110px;
+    font-family: "Teachers", sans-serif;
+    font-size: 16px;
+}
+
+.botonCrear:hover {
+    background-color: #00ffff80;
 }
 
 
 
 
 
+ /*----------------------estilo tareas completadas----------------------*/
+
+ .botonLimpiar{
+    margin: 10px 30px 30px 30px;
+    background-color: greenyellow;
+    border: transparent;
+    border-radius: 10px;
+    height: 30px;
+    width: 100px;
+    cursor: pointer;
+    border-top: #ffffff80 2px solid;
+    border-left: #ffffff80 2px solid;
+    border-right: #00000080 2px solid;
+    border-bottom: #00000080 2px solid;
+ }
 
 
-
-
-
-
-
-
-
-
-
-
-
-#limpiarTareasCompletadas{
-    margin: 10px 0px;
+.botonLimpiar:active{
+    border-top: #00000080 2px solid;
+    border-left: #00000080 2px solid;
+    border-right: #ffffff80 2px solid;
+    border-bottom: #ffffff80 2px solid;
 }
+
