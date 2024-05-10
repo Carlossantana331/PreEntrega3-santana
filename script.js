@@ -78,9 +78,12 @@ function actualizarListaTareas() {
             lista += "<li class = 'listaTareasItem'>"; // Inicia un ítem de lista
             lista += "Tarea por hacer: " + tareas[i].tarea + "<br>"; // Contenido de la tarea
             lista += "Fecha límite: " + tareas[i].fechaLimite; // Fecha límite
-            lista += `<button onclick="tareaCompletada(${i})">Completada</button>`; //Botón de finalizacion de una tarea
-            lista += `<button onclick="eliminarTarea(${i})">Eliminar</button>`; // Botón de eliminación
+            lista += "<div class = 'botonesListaTareas'>"
+            lista += `<button onclick="tareaCompletada(${i})" class = "boton"><img src="assets/check.svg"></button>`; //Botón de finalizacion de una tarea
+            lista += `<button onclick="eliminarTarea(${i})" class = "boton"><img src="assets/basura.svg"></button>`; // Botón de eliminación
+            lista += "</div>"
             lista += "</li>"; // Termina el ítem de lista
+            lista += "<div class = 'lineaDivisora'></div>";
         }
 
         lista += "</ul>"; // Termina la lista no ordenada

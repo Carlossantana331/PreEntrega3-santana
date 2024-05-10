@@ -11,60 +11,76 @@
 
 
 <body>
+
+    <article class="background">
+
+        <ul class="menu glass-effect">
+
+            <!--ocpion 1: Consultar tareas-->
+            <li class="menuItem">
+    
+                <div class="menuMostrar menuMostrarClick">
+                    <a href="#" class="menuLink">Consultar tareas pendientes</a>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="listArrow">
+                        <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
+                    </svg>
+                    
+                </div>
+    
+                <ul class="subMenu">
+                    <li class="subMenuInside">
+                        <div id="listaTareas"></div>
+                    </li>
+                </ul>
+                
+            </li>
+    
+            <!--ocpion 2: Consultar tareas-->
+            <li class="menuItem">
+    
+                <div class="menuMostrar menuMostrarClick">
+                    <a href="#" class="menuLink">Crear Tarea</a>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="listArrow">
+                        <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
+                    </svg>
+                </div>
+    
+                <ul class="subMenu ">
+                    <li class="subMenuCrear">
+                        <input type="text" id="input-tarea" placeholder="Nueva tarea">
+                        <input type="date" id="input-fecha" placeholder="Fecha límite">
+                        <button id="boton-agregar-tarea">Agregar tarea</button>
+                    </li>
+                </ul>
+                
+            </li>
+    
+    
+            <!--ocpion 3: Consultar tareas completadas-->
+            <li class="menuItem">
+    
+                <div class="menuMostrar menuMostrarClick">
+                    <a href="#" class="menuLink">Tareas completadas</a>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="listArrow">
+                        <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
+                    </svg>
+                </div>
+    
+                <ul class="subMenu">
+                    <li >
+                        <div id="listaTareasCompletadas"></div>
+                        <button id="limpiarTareasCompletadas">Limpiar tareas completadas</button>
+                    </li>  
+                </ul>
+                
+            </li>
+    
+        </ul>
+
+    </article>
     
 
-    <ul class="menu">
-
-        <!--ocpion 1: Consultar tareas-->
-        <li class="menuItem">
-
-            <div class="menuMostrar menuMostrarClick">
-                <a href="#" class="menuLink">Consultar tareas pendientes</a>
-            </div>
-
-            <ul class="subMenu">
-                <li class="subMenuInside">
-                    <div id="listaTareas"></div>
-                </li>
-            </ul>
-            
-        </li>
-
-        <!--ocpion 2: Consultar tareas-->
-        <li class="menuItem">
-
-            <div class="menuMostrar menuMostrarClick">
-                <a href="#" class="menuLink">Crear Tarea</a>
-            </div>
-
-            <ul class="subMenu ">
-                <li class="subMenuCrear">
-                    <input type="text" id="input-tarea" placeholder="Nueva tarea">
-                    <input type="date" id="input-fecha" placeholder="Fecha límite">
-                    <button id="boton-agregar-tarea">Agregar tarea</button>
-                </li>
-            </ul>
-            
-        </li>
-
-
-        <!--ocpion 3: Consultar tareas completadas-->
-        <li class="menuItem">
-
-            <div class="menuMostrar menuMostrarClick">
-                <a href="#" class="menuLink">Tareas completadas</a>
-            </div>
-
-            <ul class="subMenu">
-                <li >
-                    <div id="listaTareasCompletadas"></div>
-                    <button id="limpiarTareasCompletadas">Limpiar tareas completadas</button>
-                </li>  
-            </ul>
-            
-        </li>
-
-    </ul>
+    
 
 
     <script src="script.js"></script>

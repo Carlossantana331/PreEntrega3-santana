@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+/* font-family: "Playfair Display", serif; */
+@import url('https://fonts.googleapis.com/css2?family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+/* font-family: "Teachers", sans-serif; */
 
 * {
     margin: 0;
@@ -5,66 +9,97 @@
     box-sizing: border-box; 
 }
 
-body{
-    background-color: black;
+.background{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: url(../assets/wallpaper.jpg) no-repeat center;
+    background-size: cover;
+    align-items: center;
+    display: flex;
+}
+
+
+/*----------------------estilo general del menu----------------------*/
+a{
+    text-decoration: none;
+    list-style: none;
+    color: rgb(240, 248, 255);
+}
+
+.menu{
+    width: 45rem;
+    border: 2px solid #fafafa30;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.glass-effect {
+    background: #fafafa20;
+    backdrop-filter: blur(0.4rem);
+    -webkit-backdrop-filter: blur(0.4rem);
 }
 
 .menuItem {
     overflow: hidden;
     text-align: center;
-    width: 30%;
-    border-bottom: 2px solid rgb(255, 254, 254);
-
-    
+    width: 100%;
 }
 
 .subMenu {
     transition: height 0.4s;
     height: 0;
-}
-
-.subMenuCrear{
-    padding: 40px 0px;
-}
-
-h2{
-    font-size: 20px;
-    padding: 30px 0px;
+    font-family: "Teachers", sans-serif;
 }
 
 
-.menu{
-    height: 100vh;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-a{
-    text-decoration: none;
-    list-style: none;
-    color: aliceblue;
-}
-
+/*----------------------estilo opciones principales----------------------*/
 .menuLink{
     font-size: 30px;
-    margin-top:  50px;
+    margin: 30px;
+    font-family: "Playfair Display", serif;
 }
 
 .menuMostrar{
-    padding: 30px;
-    background-color: black;
-
+    padding: 00px 100px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.subMenu{
-    background-color: rgb(255, 255, 255);
+.menuMostrarClick:hover a{
+    color: aqua;
+}
+
+.menuMostrarClick:hover svg path {
+    fill: aqua;
+}
+
+.menuMostrarClick{
+    cursor: pointer;
+}
+
+.listArrow{
+    margin-left: auto;
+    fill: aliceblue;
+    transition: transform 0.4s;
 }
 
 .listaTareasContainer{
-    margin: 0px 50px;
+    margin: 0px 100px;
     text-align: left;
+}
+
+.arrow .listArrow{
+    transform: rotate(90deg);
+}
+
+
+/*----------------------estilo consultar tareas----------------------*/
+h2{
+    font-size: 20px;
+    padding: 30px 0px;
 }
 
 li{
@@ -72,8 +107,67 @@ li{
 }
 
 .listaTareasItem{
-    padding: 10px 0px;
+    padding: 10px 60px;
+    display: flex;
+    justify-content: space-between;
 }
+
+.botonesListaTareas{
+    display: flex;
+    gap: 10px;
+
+}
+ button.boton{
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+ }
+
+ button.boton:hover {
+    transform: scale(1.3);
+ }
+
+ .lineaDivisora{
+    border-bottom: 1px solid black;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.subMenuCrear{
+    padding: 40px 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #limpiarTareasCompletadas{
     margin: 10px 0px;
