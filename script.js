@@ -110,6 +110,8 @@ function tareaCompletada(index) {
 
 
 
+
+
 function actualizarListaTareasCompletadas() {
     let listaTareasCompletadasElemento = document.getElementById("listaTareasCompletadas");
     if (tareasCompletadas.length !== 0) {
@@ -153,7 +155,7 @@ function eliminarTarea(index) {
 // Función para agregar una nueva tarea
 function agregarNuevaTarea() {
     let tareaInput = document.getElementById("input-tarea").value.trim();
-    let fechaInput = document.getElementById("input-fecha").value; // Ya no necesitas el trim() aquí
+    let fechaInput = document.getElementById("input-fecha").value;
 
     if (tareaInput !== "" && fechaInput !== "") {
         let nuevaFecha = new Date(fechaInput); // Convertir el valor del input de fecha a un objeto de fecha
@@ -164,7 +166,9 @@ function agregarNuevaTarea() {
         document.getElementById("input-fecha").value = "";
         actualizarListaTareas();
     } else {
-        alert("Por favor, complete todos los campos.");
+        document.getElementById("boton-agregar-tarea").addEventListener('click', () => {
+            popup.showModal();
+        });
     }
 }
 
@@ -203,6 +207,13 @@ enlaceConsultarTareas.addEventListener('click', function(event) {
 
     // Llamar a la función para actualizar la lista de tareas
     actualizarListaTareas();
+});
+
+//variables para hacer funcionar la ventana emergente (popup)
+let popupBoton = document.querySelector('#popupBoton')
+let popup = document.querySelector('#popup')
+document.getElementById("popupBoton").addEventListener('click', () => {
+    popup.close();
 });
 
 // Array para almacenar las tareas
