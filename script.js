@@ -121,6 +121,14 @@ function agregarNuevaTarea() {
     }
 }
 
+//variables para hacer funcionar la ventana emergente (popup)
+let popupBoton = document.querySelector('#popupBoton')
+let popup = document.querySelector('#popup')
+document.getElementById("popupBoton").addEventListener('click', () => {
+    popup.close();
+});
+
+
 
 
 
@@ -208,11 +216,5 @@ let botonAgregarTarea = document.getElementById("boton-agregar-tarea");
 botonAgregarTarea.addEventListener("click", agregarNuevaTarea);
 
 
-//variables para hacer funcionar la ventana emergente (popup)
-let popupBoton = document.querySelector('#popupBoton')
-let popup = document.querySelector('#popup')
-document.getElementById("popupBoton").addEventListener('click', () => {
-    popup.close();
-});
 
 

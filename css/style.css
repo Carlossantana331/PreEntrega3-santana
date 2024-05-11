@@ -279,6 +279,9 @@ h2{
     background-color: #00ffff80;
 }
 
+#popup::backdrop{
+    background: rgba(0, 0, 0, 0.3);
+}
 
 
 
